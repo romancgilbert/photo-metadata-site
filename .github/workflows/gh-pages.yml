@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_BASE_URL: /${{ github.event.repository.name }}/
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
