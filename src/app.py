@@ -29,9 +29,15 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
+PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "/")
+if not PUBLIC_BASE_URL.endswith("/"):
+    PUBLIC_BASE_URL = PUBLIC_BASE_URL + "/"
+
+
 @app.context_processor
 def inject_base_url():
-    return {"base_url": "/"}
+    static_url = PUBLIC_BASE_URL + "static/"
+    return {"base_url": PUBLIC_BASE_URL, "static_url": static_url}
 
 # ---- Personal gallery metadata ----
 METADATA_PATH = "../assets/data/photos.json"
