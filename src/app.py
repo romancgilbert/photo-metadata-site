@@ -29,6 +29,10 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
+@app.context_processor
+def inject_base_url():
+    return {"base_url": "/"}
+
 # ---- Personal gallery metadata ----
 METADATA_PATH = "../assets/data/photos.json"
 PROCESSED_DIR = "../assets/photos_processed"
@@ -170,4 +174,3 @@ def delete_blob(blob_name):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
-

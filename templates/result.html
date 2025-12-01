@@ -26,9 +26,9 @@
     </ul>
 
     <div class="buttons">
-      <a class="btn secondary" href="/">Back Home</a>
+      <a class="btn secondary" href="{{ base_url }}">Back Home</a>
       {% if blob_name %}
-      <a class="btn primary" href="/delete_blob/{{ blob_name }}">Delete &amp; Return Home</a>
+      <a class="btn primary" href="{{ base_url }}delete_blob/{{ blob_name }}">Delete &amp; Return Home</a>
       {% endif %}
     </div>
   </section>
@@ -38,9 +38,8 @@
 <script>
   // Best-effort auto delete when user leaves this page
   window.addEventListener("beforeunload", () => {
-    navigator.sendBeacon("/delete_blob/{{ blob_name }}");
+    navigator.sendBeacon("{{ base_url }}delete_blob/{{ blob_name }}");
   });
 </script>
 {% endif %}
 {% endblock %}
-

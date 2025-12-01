@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Roman Gilbert Photography{% endblock %}</title>
-  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="{{ base_url }}static/styles.css">
 </head>
 <body>
   <nav class="nav">
     <div class="nav-left">
-      <a href="/" class="logo">RG</a>
+      <a href="{{ base_url }}" class="logo">RG</a>
     </div>
     <div class="nav-right">
-      <a href="/">Home</a>
-      <a href="/gallery">My Photography</a>
+      <a href="{{ base_url }}">Home</a>
+      <a href="{{ base_url }}gallery/">My Photography</a>
       <a href="https://www.instagram.com/rchristian.digital">Instagram Portfolio</a>
     </div>
   </nav>
@@ -20,4 +20,3 @@
   {% block content %}{% endblock %}
 </body>
 </html>
-

@@ -13,7 +13,7 @@
 
 <main class="grid">
   {% for photo in photos %}
-  <a class="card" href="/photo/{{ photo.filename }}">
+  <a class="card" href="{{ base_url }}photo/{{ photo.filename }}/">
     <img src="{{ photo.drive_url }}" alt="{{ photo.filename }}">
     <div class="card-body">
       <h2>{{ photo.camera or "Unknown Camera" }}</h2>
@@ -23,4 +23,3 @@
   {% endfor %}
 </main>
 {% endblock %}
-

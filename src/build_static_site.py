@@ -35,8 +35,11 @@ def get_env() -> Environment:
     )
 
 
-def render_to_file(env: Environment, template: str, destination: Path, **context) -> None:
+def render_to_file(
+    env: Environment, template: str, destination: Path, base_url: str, **context
+) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
+    context["base_url"] = base_url
     rendered = env.get_template(template).render(**context)
     destination.write_text(rendered, encoding="utf-8")
 
@@ -59,14 +62,21 @@ def build_site() -> None:
         if target.exists():
             shutil.rmtree(target)
 
-    render_to_file(env, "index.html", OUTPUT_DIR / "index.html")
-    render_to_file(env, "gallery.html", OUTPUT_DIR / "gallery" / "index.html", photos=photos)
+    render_to_file(env, "index.html", OUTPUT_DIR / "index.html", base_url="./")
+    render_to_file(
+        env,
+        "gallery.html",
+        OUTPUT_DIR / "gallery" / "index.html",
+        base_url="../",
+        photos=photos,
+    )
 
     for photo in photos:
         render_to_file(
             env,
             "photo.html",
             OUTPUT_DIR / "photo" / photo["filename"] / "index.html",
+            base_url="../../",
             photo=photo,
         )
 
